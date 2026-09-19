@@ -1,4 +1,4 @@
-''' Heka QX Playing Card Hash/MAC'''
+''' QX Playing Card Hash/MAC'''
 ''' by KryptoMagick (Karl Zander) '''
 from random import shuffle
 
@@ -18,24 +18,28 @@ class QX:
          
          self.deck.insert(self.deck[1], self.deck.pop(0))
          
-         return chr(((self.deck[self.deck[self.deck[0]]]) % 26) + 65)
+         
+         for x in range(self.deck[self.deck[self.deck[0]]]):
+         	self.deck.append(self.deck.pop(0))
          
     def input_letter(self, letter):
         num = ord(letter) - 65
         self.qx_input(num)
 
     def mac(self, letters):
-        m = []
         for x in range(len(letters)):
             self.input_letter(letters[x])
-        for x in range(52):
-        	m.append(self.heka_core())
+        self.heka_core()
+        m = []
+        for x in range(len(self.deck)):
+        	self.qx_input(self.deck[x])
+        for x in range(len(self.deck)):
+        	m.append(chr((self.deck[x] % 26) + 65))
         return "".join(m)
         
 qx = QX()
 #heka.gen_rand_decks()
 m = [chr(65)] * 100000
 #msg = "".join(m)
-msg = "HELLOWORLD"
-tag = qx.mac(msg)
-print(tag)
+msg = "A"
+tag = qx.mac(ms
