@@ -42,4 +42,5 @@ qx = QX()
 m = [chr(65)] * 100000
 #msg = "".join(m)
 msg = "A"
-tag = qx.mac(ms
+tag = qx.mac(msg)
+print(tag)
