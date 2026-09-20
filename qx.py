@@ -21,7 +21,7 @@ class QX:
                  c += 4
     
     	for x in range(4):
-    		self.deck.append(self.deck.pop(0))
+    	    self.deck.append(self.deck.pop(0))
     
     def interleave(self):
     	d = []
@@ -34,12 +34,18 @@ class QX:
     def qx_input(self, n):
     	self.deck.append(self.deck.pop(n))
     	
+    def heka(self):
+         self.deck.append(self.deck.pop(0))
+         self.deck.append(self.deck.pop(0))
+         
+         self.deck.insert(self.deck[1], self.deck.pop(0))
+         return chr((self.deck[self.deck[self.deck[0]]] % 26) + 65)
+    	
     def heka_core(self):
          self.deck.append(self.deck.pop(0))
          self.deck.append(self.deck.pop(0))
          
          self.deck.insert(self.deck[1], self.deck.pop(0))
-         
          
          for x in range(self.deck[self.deck[self.deck[0]]]):
          	self.deck.append(self.deck.pop(0))
@@ -57,14 +63,14 @@ class QX:
         m = []
         for x in range(len(self.deck)):
         	self.qx_input(self.deck[x])
-        for x in range(len(self.deck)):
-        	m.append(chr((self.deck[x] % 26) + 65))
+        for x in range(52):
+        	m.append(self.heka())
         return "".join(m)
         
 qx = QX()
 #heka.gen_rand_decks()
 m = [chr(65)] * 100000
 #msg = "".join(m)
-msg = "B "
+msg = "A "
 tag = qx.mac(msg)
 print(tag)
