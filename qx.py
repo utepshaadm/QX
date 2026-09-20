@@ -63,8 +63,9 @@ class QX:
         m = []
         for x in range(len(self.deck)):
         	self.qx_input(self.deck[x])
-        for x in range(52):
-        	m.append(self.heka())
+        for x in range(len(self.deck)):
+        	m.append(chr((self.deck[x] % 26) + 65))
+   
         return "".join(m)
         
 qx = QX()
