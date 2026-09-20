@@ -57,6 +57,8 @@ class QX:
     def mac(self, letters):
         for x in range(len(letters)):
             self.input_letter(letters[x])
+        for x in range(len(self.deck)):
+        	self.qx_input(self.deck[x])
         self.transpose()
         self.interleave()
         self.heka_core()
@@ -72,6 +74,6 @@ qx = QX()
 #heka.gen_rand_decks()
 m = [chr(65)] * 100000
 #msg = "".join(m)
-msg = "A "
+msg = "B "
 tag = qx.mac(msg)
 print(tag)
