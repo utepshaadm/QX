@@ -9,6 +9,28 @@ class QX:
     def gen_rand_decks(self):
     	shuffle(self.deck)
     	
+    def transpose(self):
+    	c = 0
+    	i = 0
+    	for x in range(13):
+    		for y in range(c):
+                 self.deck[c + 0], self.deck[c + 1] = self.deck[c + 1], self.deck[c + 0]
+                 self.deck[c + 2], self.deck[c + 1] = self.deck[c + 1], self.deck[c + 2]
+                 self.deck[c + 2], self.deck[c + 3] = self.deck[c + 3], self.deck[c + 2]
+                 self.deck[c + 0], self.deck[c + 3] = self.deck[c + 3], self.deck[c + 0]
+                 c += 4
+    
+    	for x in range(4):
+    		self.deck.append(self.deck.pop(0))
+    
+    def interleave(self):
+    	d = []
+    	c = 0
+    	for x in range(26):
+    		d.append(self.deck.pop(1 + c))
+    		c += 1
+    	self.deck.extend(d)
+    	
     def qx_input(self, n):
     	self.deck.append(self.deck.pop(n))
     	
@@ -29,6 +51,8 @@ class QX:
     def mac(self, letters):
         for x in range(len(letters)):
             self.input_letter(letters[x])
+        self.transpose()
+        self.interleave()
         self.heka_core()
         m = []
         for x in range(len(self.deck)):
@@ -41,6 +65,6 @@ qx = QX()
 #heka.gen_rand_decks()
 m = [chr(65)] * 100000
 #msg = "".join(m)
-msg = "A"
+msg = "B "
 tag = qx.mac(msg)
 print(tag)
